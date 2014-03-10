@@ -1,4 +1,2 @@
-toulouse_secretgui
-==================
-
-very secret
+qmcchem_gui
+===========
