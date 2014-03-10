@@ -25,3 +25,6 @@ Current goal: Finish CIPSI, gto and sto, should read ouput and create an input
 * Integrate into cipsi/qmcchehm install
 * Nicer Gui
 * Get a logo!
+* User tutorial
+* Website
+* sphynx documentation
