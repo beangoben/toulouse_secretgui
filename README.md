@@ -7,12 +7,13 @@ Current goal: Finish CIPSI, gto and sto, should read ouput and create an input
 
 * Fix tooltips
 * General way of opening and saving files
-* Menu bar : build, analyse, 
+* Menu bar : build, analyse,
 * Tabbed windows (CIPSI,QMCHCHEM,HF,ETC, closable?)
-* Read Testfiles, 
-* Interface to EZFIO, CCLib 
+* Read Testfiles,
+* Interface to EZFIO, CCLib
 * Generate table automatically
 * Make all parts modular
+* Clean up enviroment to make it more general, i.e. independt of user machine : sys.path +=  [ "/home/razoa/CIPSI/EZFIO/Python", "/home/razoa/resultsFile/resultsFile" ]
 
 
 
