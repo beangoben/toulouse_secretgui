@@ -6,10 +6,11 @@ Current goal: Finish CIPSI, gto and sto, should read ouput and create an input
 ## Todo-list short term
 
 * Fix tooltips
-* Menu bar
-* Tabbed windows (CIPSI,QMCHCHEM,HF,ETC)
-* Read Testfiles
-* Interface to EZFIO, CCLib
+* General way of opening and saving files
+* Menu bar : build, analyse, 
+* Tabbed windows (CIPSI,QMCHCHEM,HF,ETC, closable?)
+* Read Testfiles, 
+* Interface to EZFIO, CCLib 
 * Generate table automatically
 * Make all parts modular
 
