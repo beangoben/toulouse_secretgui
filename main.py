@@ -4,14 +4,13 @@
 import sys
 from PyQt4.QtCore import *
 from PyQt4.QtGui import QMainWindow, QApplication, QStyleFactory, QStatusBar
-from PyQt4.QtGui import QWidget, QTabWidget, QAction, QFileDialog, QMenu
+from PyQt4.QtGui import QWidget, QTabWidget, QAction, QFileDialog, QMenu, QIcon
 
 from parsers.slater_parser import slater_wraper
 from cipsi.CipsiWidget import *
 
 
 class MainWindow(QMainWindow):
-
 
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -43,7 +42,6 @@ class MainWindow(QMainWindow):
         inputQMC.setStatusTip('create/edit QMC input')
         inputQMC.triggered.connect(self.creatQMCInputTab)
 
-
         input_menu = QMenu("Input", self)
         input_menu.addAction(inputQMC)
         input_menu.addAction(inputCipsi)
@@ -60,6 +58,11 @@ class MainWindow(QMainWindow):
         output_menu.addAction(outputQMC)
         output_menu.addAction(outputCipsi)
 
+        exitAction = QAction(QIcon('exit.png'), '&Exit', self)
+        exitAction.setShortcut('Ctrl+Q')
+        exitAction.setStatusTip('Exit application')
+        exitAction.triggered.connect(QApplication.quit)
+
         menubar = self.menuBar()
         fileMenu = menubar.addMenu('&File')
         fileMenu.addAction(openFile)
@@ -67,9 +70,16 @@ class MainWindow(QMainWindow):
         fileMenu.addAction(saveToEZFIO)
         fileMenu.addMenu(input_menu)
         fileMenu.addMenu(output_menu)
+        fileMenu.addAction(exitAction)
 
-        self.tab_widget = QTabWidget()
-        self.setCentralWidget(self.tab_widget)
+        helpMenu = menubar.addMenu('&Help')
+
+
+        tab_widget = QTabWidget()
+        tab_widget.setTabsClosable(True)
+        tab_widget.tabCloseRequested.connect(tab_widget.removeTab)
+        self.setCentralWidget(tab_widget)
+        self.tab_widget=tab_widget
 
         self.setWindowTitle("Pig Is a Gui")
         self.setMinimumSize(160, 160)
@@ -132,6 +142,7 @@ class MainWindow(QMainWindow):
 
     def emptySlot(self):
         return
+
 
 def main(args):
     app = QApplication(args)
