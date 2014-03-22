@@ -7,10 +7,10 @@ from InformationWidget import *
 from PyQt4.QtGui import QWidget, QGridLayout, QVBoxLayout
 
 
-class cipsiWidget(QWidget):
+class CipsiWidget(QWidget):
 
     def __init__(self, parent=None):
-        super(cipsiWidget, self).__init__(parent)
+        super(CipsiWidget, self).__init__(parent)
         self.initUI()
 
     def initUI(self):

@@ -4,13 +4,14 @@
 import sys
 from PyQt4.QtCore import *
 from PyQt4.QtGui import QMainWindow, QApplication, QStyleFactory, QStatusBar
-from PyQt4.QtGui import QWidget, QTabWidget, QAction, QFileDialog
+from PyQt4.QtGui import QWidget, QTabWidget, QAction, QFileDialog, QMenu
 
 from parsers.slater_parser import slater_wraper
 from cipsi.CipsiWidget import *
 
 
 class MainWindow(QMainWindow):
+
 
     def __init__(self):
         super(MainWindow, self).__init__()
@@ -34,18 +35,41 @@ class MainWindow(QMainWindow):
         saveToEZFIO.setStatusTip('Save on folder EZFIO proof')
         saveToEZFIO.triggered.connect(self.showDialogFolderSave)
 
+        inputCipsi = QAction('CIPSI', self)
+        inputCipsi.setStatusTip('create/edit CIPSI input')
+        inputCipsi.triggered.connect(self.creatCipsiInputTab)
+
+        inputQMC = QAction('QMC', self)
+        inputQMC.setStatusTip('create/edit QMC input')
+        inputQMC.triggered.connect(self.creatQMCInputTab)
+
+
+        input_menu = QMenu("Input", self)
+        input_menu.addAction(inputQMC)
+        input_menu.addAction(inputCipsi)
+
+        outputCipsi = QAction('CIPSI', self)
+        outputCipsi.setStatusTip('create/edit CIPSI output')
+        outputCipsi.triggered.connect(self.emptySlot)
+
+        outputQMC = QAction('QMC', self)
+        outputQMC.setStatusTip('create/edit QMC output')
+        outputQMC.triggered.connect(self.emptySlot)
+
+        output_menu = QMenu("Output", self)
+        output_menu.addAction(outputQMC)
+        output_menu.addAction(outputCipsi)
+
         menubar = self.menuBar()
         fileMenu = menubar.addMenu('&File')
         fileMenu.addAction(openFile)
         fileMenu.addAction(openEZFIO)
         fileMenu.addAction(saveToEZFIO)
+        fileMenu.addMenu(input_menu)
+        fileMenu.addMenu(output_menu)
 
-        tab_widget = QTabWidget()
-        tab1 = cipsiWidget()
-        tab2 = QWidget()
-        tab_widget.addTab(tab1, "CIPSI")
-        tab_widget.addTab(tab2, "QMC")
-        self.setCentralWidget(tab_widget)
+        self.tab_widget = QTabWidget()
+        self.setCentralWidget(self.tab_widget)
 
         self.setWindowTitle("Pig Is a Gui")
         self.setMinimumSize(160, 160)
@@ -98,6 +122,16 @@ class MainWindow(QMainWindow):
             for d in dialog.selectedFiles():
                 wrater.write_ezfio(str(d))
 
+    def creatCipsiInputTab(self):
+        tab = CipsiWidget()
+        self.tab_widget.addTab(tab, "CIPSI input")
+
+    def creatQMCInputTab(self):
+        tab = QWidget()
+        self.tab_widget.addTab(tab, "QMC input")
+
+    def emptySlot(self):
+        return
 
 def main(args):
     app = QApplication(args)
