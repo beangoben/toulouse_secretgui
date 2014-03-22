@@ -1,4 +1,9 @@
-class orbitalWidget(QGroupBox):
+from PyQt4.QtGui import QGroupBox, QPushButton, QHeaderView, QVBoxLayout
+from PyQt4.QtGui import QWidget
+from OrbitalTable import *
+
+
+class OrbitalWidget(QGroupBox):
 
     def __init__(self):
         super(QGroupBox, self).__init__()
@@ -7,7 +12,7 @@ class orbitalWidget(QGroupBox):
 
     def initUI(self):
 
-        table= orbitalTable(0, 3)
+        table = OrbitalTable(0, 3)
         table.horizontalHeader().setResizeMode(QHeaderView.Stretch)
 
         btn_active = QPushButton('Active', self)
@@ -32,7 +37,7 @@ class orbitalWidget(QGroupBox):
         vbox.addWidget(btn_frozen)
         vbox.addWidget(btn_inactive)
 
-        w=QWidget()
+        w = QWidget()
 
         w.setLayout(vbox)
 
